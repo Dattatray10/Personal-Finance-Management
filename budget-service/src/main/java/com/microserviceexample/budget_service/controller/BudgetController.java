@@ -32,8 +32,8 @@ public class BudgetController {
        return  budgetService.getBudgetdetails(id);
     }
 
-    @GetMapping("/getbyCategory")
-    public Budget findBudgetById(@PathVariable String category) {
+    @GetMapping("/getbyCategory/{category}")
+    public Budget findBudgetByCategory(@PathVariable String category) {
 
         return  budgetService.getBudgetdetails(category);
     }

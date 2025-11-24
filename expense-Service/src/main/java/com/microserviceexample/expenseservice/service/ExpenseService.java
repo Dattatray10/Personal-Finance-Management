@@ -22,7 +22,7 @@ public class ExpenseService {
     private RestTemplate restTemplate;
 
     private final String BUDGET_SERVICE_URL = "http://localhost:8082/budget/getbyCategory/";
-    private final String NOTIFICATION_SERVICE_URL = "http://localhost:8084/noitfy/create/";
+    private final String NOTIFICATION_SERVICE_URL = "http://localhost:8084/notify/create";
 
     @Transactional
     public Expense addExpence(Expense expense) {
@@ -45,7 +45,7 @@ public class ExpenseService {
                 notification.setExpenseAmount(expense.getExpenseAmount());
                 notification.setBudgetAmount(budget.getAmount());
 
-                restTemplate.postForObject(NOTIFICATION_SERVICE_URL , notification, String.class);
+                restTemplate.postForObject(NOTIFICATION_SERVICE_URL , notification, Notification.class);
             }
         } catch (Exception e) {
             System.err.println("Error in calling the service : " + e.getMessage());
