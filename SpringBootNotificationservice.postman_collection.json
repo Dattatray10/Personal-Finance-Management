@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "75a97b16-d03f-4cfa-8019-f96e165b6e06",
+		"name": "SpringBootNotificationservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27672743"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"budgetCategory\" : \"grocery\",\r\n    \"budgetAmount\" : 5000,\r\n    \"expenseDescription\" : \"food and beverages\",\r\n    \"expenseAmount\" : 2000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localHost:8084/notify/create",
+					"host": [
+						"localHost"
+					],
+					"port": "8084",
+					"path": [
+						"notify",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

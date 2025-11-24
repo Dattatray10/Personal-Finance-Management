@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "bf1d2530-a1ce-444a-8a27-df51fad8678f",
+		"name": "SpringBootExpenseService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27672743"
+	},
+	"item": [
+		{
+			"name": "createExpense",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"expenseTitle\":\"grocery\",\r\n    \"expenseDescription\":\"food and beverages\",\r\n    \"expenseAmount\": 2000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localHost:8083/expense/create",
+					"host": [
+						"localHost"
+					],
+					"port": "8083",
+					"path": [
+						"expense",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllExpense",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"expenseTitle\":\"grocery\",\r\n    \"expenseDescription\":\"food and beverages\",\r\n    \"expenseAmount\": 2000\r\n}"
+				},
+				"url": {
+					"raw": "localHost:8083/expense/getAll",
+					"host": [
+						"localHost"
+					],
+					"port": "8083",
+					"path": [
+						"expense",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
