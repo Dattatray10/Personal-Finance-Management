@@ -7,6 +7,7 @@ import com.microserviceexample.expenseservice.entity.Notification;
 import com.microserviceexample.expenseservice.repository.ExpenseRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,13 +22,17 @@ public class ExpenseService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String BUDGET_SERVICE_URL = "http://localhost:8082/budget/getbyCategory/";
-    private final String NOTIFICATION_SERVICE_URL = "http://localhost:8084/notify/create";
+    @Value("${budgeturl}")
+    private  String BUDGET_SERVICE_URL ;
+    @Value("${notificationurl}")
+    private  String NOTIFICATION_SERVICE_URL ;
 
     @Transactional
     public Expense addExpence(Expense expense) {
 
         Expense newExpense = expenseRepo.save(expense);
+    System .out.println(BUDGET_SERVICE_URL);
+        System .out.println(NOTIFICATION_SERVICE_URL);
 
         Double totalexpenseAmt = expenseRepo.findByExpenseTitle(expense.getExpenseTitle()).stream()
                 .mapToDouble(Expense::getExpenseAmount).sum();
@@ -55,6 +60,9 @@ public class ExpenseService {
     }
 
     public List<Expense> findAllExpense() {
+
+         Double sum= expenseRepo.findAll().stream().mapToDouble(Expense::getExpenseAmount).sum();
+        System.out.print(sum);
 
         return expenseRepo.findAll();
     }
