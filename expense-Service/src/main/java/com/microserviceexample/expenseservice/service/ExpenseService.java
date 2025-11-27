@@ -1,6 +1,9 @@
 package com.microserviceexample.expenseservice.service;
 
 
+
+import com.microserviceexample.expenseservice.config.BudgetClient;
+import com.microserviceexample.expenseservice.config.NotificationClient;
 import com.microserviceexample.expenseservice.entity.Budget;
 import com.microserviceexample.expenseservice.entity.Expense;
 import com.microserviceexample.expenseservice.entity.Notification;
@@ -22,6 +25,12 @@ public class ExpenseService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private BudgetClient budgetClient;
+
+    @Autowired
+    private NotificationClient notificationClient;
+
     @Value("${budgeturl}")
     private  String BUDGET_SERVICE_URL ;
     @Value("${notificationurl}")
@@ -39,8 +48,8 @@ public class ExpenseService {
 
         try {
 
-            Budget budget = restTemplate.getForObject(BUDGET_SERVICE_URL + newExpense.getExpenseTitle(), Budget.class);
-
+          //  Budget budget = restTemplate.getForObject(BUDGET_SERVICE_URL + newExpense.getExpenseTitle(), Budget.class);
+                Budget budget = budgetClient.getBudget(expense.getExpenseTitle());
             if (budget != null && totalexpenseAmt > budget.getAmount()) {
 
                 Notification notification = new Notification();
@@ -50,7 +59,8 @@ public class ExpenseService {
                 notification.setExpenseAmount(expense.getExpenseAmount());
                 notification.setBudgetAmount(budget.getAmount());
 
-                restTemplate.postForObject(NOTIFICATION_SERVICE_URL , notification, Notification.class);
+               // restTemplate.postForObject(NOTIFICATION_SERVICE_URL , notification, Notification.class);
+                notificationClient.createNotification(notification);
             }
         } catch (Exception e) {
             System.err.println("Error in calling the service : " + e.getMessage());

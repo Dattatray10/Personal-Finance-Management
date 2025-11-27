@@ -2,6 +2,7 @@ package com.microserviceexample.budget_service.controller;
 
 import com.microserviceexample.budget_service.entity.Budget;
 import com.microserviceexample.budget_service.service.BudgetService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +13,12 @@ public class BudgetController {
     private BudgetService budgetService;
 
     @PostMapping("/create")
-    public Budget createBudget(@RequestBody Budget budget) {
+    public Budget createBudget(@Valid @RequestBody Budget budget) {
         return budgetService.createBudget(budget);
     }
 
     @PutMapping("/update")
-    public Budget updateBudget(@RequestBody Budget budget) {
+    public Budget updateBudget(@Valid @RequestBody Budget budget) {
      return budgetService.updateBudget(budget);
     }
 
@@ -33,7 +34,7 @@ public class BudgetController {
     }
 
     @GetMapping("/getbyCategory/{category}")
-    public Budget findBudgetByCategory(@PathVariable String category) {
+    public Budget findBudgetByCategory(@Valid @PathVariable String category) {
 
         return  budgetService.getBudgetdetails(category);
     }
